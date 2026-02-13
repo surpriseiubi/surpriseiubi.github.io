@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Princess 💖</title>
+
+<style>
+
+/* ===== BACKGROUND ===== */
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(-45deg, #ff6b9d, #ffc3d9, #ff8fab, #ff4d6d);
+    background-size: 400% 400%;
+    animation: gradientMove 12s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===== GLASS CARD ===== */
+.card {
+    width: 420px;
+    padding: 30px;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    text-align: center;
+    color: white;
+}
+
+/* ===== TEXT ===== */
+h1 {
+    margin: 10px 0;
+    font-size: 26px;
+}
+
+p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+/* ===== HEART IMAGE ===== */
+.heart-container {
+    width: 260px;
+    height: 240px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.heart-container svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 20px rgba(255,255,255,0.8));
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { filter: drop-shadow(0 0 15px white); }
+    to { filter: drop-shadow(0 0 35px white); }
+}
+
+/* ===== BUTTONS ===== */
+.buttons {
+    position: relative;
+    margin-top: 15px;
+    height: 60px;
+}
+
+button {
+    padding: 12px 28px;
+    border-radius: 50px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    position: absolute;
+}
+
+#yesBtn {
+    left: 25%;
+    background: white;
+    color: #ff4d6d;
+    font-weight: bold;
+}
+
+#yesBtn:hover {
+    transform: scale(1.1);
+}
+
+#noBtn {
+    position: fixed; /* important */
+    background: #ff1744;
+    color: white;
+}
+
+
+/* ===== FLOATING HEARTS ===== */
+.floating-heart {
+    position: absolute;
+    font-size: 20px;
+    animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* ===== CELEBRATION ===== */
+.celebrate {
+    position: fixed;
+    font-size: 35px;
+    animation: pop 1s ease-out forwards;
+}
+
+@keyframes pop {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(3); opacity: 0; }
+}
+
+</style>
+</head>
+<body>
+
+<audio autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b9e63.mp3?filename=romantic-piano-11054.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+
+    <h1>Hi My Looovveeeee 💕</h1>
+    <p>You make my world brighter every single day ✨</p>
+
+    <div class="heart-container">
+        <svg viewBox="0 0 500 500">
+            <defs>
+                <clipPath id="heartClip">
+                    <path d="M250 450 
+                             C 50 300, 50 120, 250 200 
+                             C 450 120, 450 300, 250 450 Z"/>
+                </clipPath>
+            </defs>
+            <image href="photo.jpeg"
+                   width="500"
+                   height="500"
+                   preserveAspectRatio="xMidYMid meet"
+                   clip-path="url(#heartClip)" />
+        </svg>
+    </div>
+
+    <h1>Will You Be My Valentine? 💖</h1>
+
+    <div class="buttons">
+        <button id="yesBtn">YES 💕</button>
+        <button id="noBtn">NO 😢</button>
+    </div>
+
+</div>
+<script>
+
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+
+/* Make NO button move safely inside viewport */
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("click", moveButton);
+
+function moveButton() {
+
+    // Force it to be fixed to viewport
+    noBtn.style.position = "fixed";
+
+    const btnWidth = noBtn.offsetWidth;
+    const btnHeight = noBtn.offsetHeight;
+
+    const padding = 20; // keeps it away from edges
+
+    const maxX = window.innerWidth - btnWidth - padding;
+    const maxY = window.innerHeight - btnHeight - padding;
+
+    const minX = padding;
+    const minY = padding;
+
+    const randomX = Math.random() * (maxX - minX) + minX;
+    const randomY = Math.random() * (maxY - minY) + minY;
+
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+}
+
+
+/* YES celebration */
+yesBtn.addEventListener("click", function() {
+
+    document.body.innerHTML = `
+        <div style="color:white;text-align:center;margin-top:20vh;">
+            <h1>YAAAAAY Iubiirreeaaa vietii melleeee!!! 💖</h1>
+            <h2>You just made me the happiest man alive 🥹</h2>
+            <h3>I love you more than words can explain to the moon and back 💕</h3>
+        </div>
+    `;
+
+    for (let i = 0; i < 100; i++) {
+        const heart = document.createElement("div");
+        heart.style.position = "fixed";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = Math.random() * window.innerHeight + "px";
+        heart.style.fontSize = "30px";
+        heart.style.animation = "pop 1s ease-out forwards";
+        heart.innerHTML = "💖";
+        document.body.appendChild(heart);
+    }
+});
+
+</script>
+
+
+</body>
+</html>
